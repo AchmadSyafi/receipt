@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu NoPlan</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-light: #93c5fd;
+        --secondary: #1e40af;
+        --light: #f0f9ff;
+        --dark: #2a2118;
+        --success: #4caf50;
+        --danger: #f44336;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(42, 33, 24, 0.1);
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        color: var(--secondary);
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        color: var(--primary);
+        font-weight: 300;
+      }
+
+      .menu-system {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      @media (min-width: 992px) {
+        .menu-system {
+          flex-direction: row;
+        }
+      }
+
+      .menu-section {
+        flex: 1;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .order-section {
+        width: 100%;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      @media (min-width: 992px) {
+        .order-section {
+          width: 350px;
+        }
+      }
+
+      .search-container {
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .search {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        outline: none;
+        transition: border 0.3s;
+        padding-left: 40px;
+      }
+
+      .search:focus {
+        border-color: var(--primary);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #777;
+      }
+
+      .category-tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .tab {
+        padding: 10px 15px;
+        cursor: pointer;
+        font-weight: 500;
+        color: #666;
+        transition: all 0.3s;
+        border-bottom: 2px solid transparent;
+      }
+
+      .tab.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      .tab:hover:not(.active) {
+        color: var(--dark);
+        border-bottom-color: #ddd;
+      }
+
+      .menu-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .menu-item {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .menu-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .menu-item-image {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+
+      .menu-item-info {
+        padding: 20px;
+      }
+
+      .menu-item-name {
+        font-weight: 500;
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: var(--secondary);
+      }
+
+      .menu-item-description {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .menu-item-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-item-price {
+        font-weight: 500;
+        color: var(--primary);
+        font-size: 16px;
+      }
+
+      .add-to-order {
+        background: var(--primary);
+        color: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s;
+        font-size: 18px;
+      }
+
+      .add-to-order:hover {
+        background: var(--secondary);
+      }
+
+      .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .order-title {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--secondary);
+      }
+
+      .print-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .print-btn:hover {
+        background: var(--secondary);
+      }
+
+      .customer-name {
+        margin-bottom: 20px;
+      }
+
+      .customer-name input {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        outline: none;
+        transition: border 0.3s;
+      }
+
+      .customer-name input:focus {
+        border-color: var(--primary);
+      }
+
+      .order-items {
+        margin-bottom: 20px;
+      }
+
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .order-item-name {
+        font-weight: 500;
+      }
+
+      .order-item-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .order-item-quantity {
+        font-size: 14px;
+        color: #666;
+        min-width: 20px;
+        text-align: center;
+      }
+
+      .remove-from-order {
+        background: var(--danger);
+        color: white;
+        border: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s;
+        font-size: 14px;
+      }
+
+      .remove-from-order:hover {
+        background: #d32f2f;
+      }
+
+      .order-summary {
+        padding-top: 15px;
+        margin-top: 15px;
+        border-top: 1px solid #ddd;
+      }
+
+      .order-total {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        font-size: 18px;
+      }
+
+      .no-items {
+        text-align: center;
+        color: #666;
+        padding: 20px 0;
+      }
+
+      .receipt {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .receipt-content {
+        background: white;
+        width: 90%;
+        max-width: 500px;
+        padding: 30px;
+        border-radius: 8px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .receipt-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .receipt-title {
+        font-family: "Playfair Display", serif;
+        color: var(--secondary);
+        margin-bottom: 5px;
+      }
+
+      .receipt-date {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .receipt-items {
+        margin: 20px 0;
+      }
+
+      .receipt-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .receipt-total {
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 2px dashed #ccc;
+        font-weight: 500;
+        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .receipt-footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+        font-style: italic;
+        font-size: 14px;
+      }
+
+      .close-receipt {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      .close-receipt:hover {
+        background: var(--secondary);
+      }
+
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        .receipt,
+        .receipt * {
+          visibility: visible;
+        }
+        .receipt {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: auto;
+          background: none;
+        }
+        .receipt-content {
+          width: 100%;
+          box-shadow: none;
+          padding: 0;
+          margin: 0;
+          max-height: none;
+          overflow: visible;
+        }
+        .close-receipt {
+          display: none;
+        }
+      }
+
+      /* Loading animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>No Plan Kitchen</h1>
+        <p class="subtitle">Friendly prices</p>
+      </header>
+
+      <div class="menu-system">
+        <div class="menu-section">
+          <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              class="search"
+              placeholder="Search menu items..."
+              id="searchInput"
+            />
+          </div>
+
+          <div class="category-tabs">
+            <div class="tab active" data-category="food">Food</div>
+            <div class="tab" data-category="drinks">Drinks</div>
+            <div class="tab" data-category="snacks">Snacks</div>
+          </div>
+
+          <div class="menu-items" id="menuItems">
+            <!-- Menu items will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="order-section">
+          <div class="order-header">
+            <h2 class="order-title">Your Order</h2>
+            <button class="print-btn" id="printBtn">
+              <span class="print-icon">🖨️</span> Print Receipt
+            </button>
+          </div>
+
+          <div class="customer-name">
+            <input
+              type="text"
+              id="customerName"
+              placeholder="Order under the name of..."
+            />
+          </div>
+
+          <div class="order-items" id="orderItems">
+            <p class="no-items">No items added yet</p>
+          </div>
+
+          <div class="order-summary">
+            <div class="order-total">
+              <span>Total:</span>
+              <span id="orderTotal">Rp0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="receipt" id="receiptModal">
+      <div class="receipt-content">
+        <div class="receipt-header">
+          <h2 class="receipt-title">No Plan Receipt</h2>
+          <p class="receipt-date" id="receiptDate"></p>
+        </div>
+
+        <div class="customer-info">
+          <p>
+            <strong>Customer:</strong> <span id="receiptCustomerName"></span>
+          </p>
+          <p><strong>Date:</strong> <span id="receiptOrderDate"></span></p>
+        </div>
+
+        <div class="receipt-items" id="receiptItems">
+          <!-- Receipt items will be populated by JavaScript -->
+        </div>
+
+        <div class="receipt-total">
+          <span>Total:</span>
+          <span id="receiptTotal">Rp0</span>
+        </div>
+
+        <div class="receipt-footer">
+          <p>Thank you for dining with us! We hope to see you again soon.</p>
+        </div>
+
+        <button class="close-receipt" id="closeReceipt">Close</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Sample menu data
+        const menuData = {
+          food: [
+            {
+              id: 1,
+              name: "Nasi Goreng",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fc062f78-828c-45e5-8626-71cb8fe1356b.png",
+            },
+            {
+              id: 2,
+              name: "Indomie Goreng Telur",
+              description:
+                "Fresh salmon fillet with lemon butter sauce and seasonal vegetables",
+              price: 16.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18a4548b-3eb6-4bfa-809d-c867ee5138d5.png",
+            },
+            {
+              id: 3,
+              name: " Indomie Kuah Telur",
+              description:
+                "Premium beef tenderloin with mushroom sauce and truffle mashed potatoes",
+              price: 16.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c0bea639-ddb6-4e3f-adc9-53a5255540d7.png",
+            },
+            {
+              id: 4,
+              name: "Rice Bowl Ayam Sambal Matah",
+              description:
+                "Creamy arborio rice with seasonal vegetables and parmesan",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/728e03fa-5b18-47b7-93a7-1c9df7bda52a.png",
+            },
+            {
+              id: 5,
+              name: "Ricebowl Ayam Asam Manis",
+              description:
+                "Traditional pizza with tomato sauce, mozzarella, and basil",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38d09171-8ac3-409c-bdd2-f574a91bbdc5.png",
+            },
+            {
+              id: 6,
+              name: "Sate Taichan",
+              description:
+                "Traditional pizza with tomato sauce, mozzarella, and basil",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38d09171-8ac3-409c-bdd2-f574a91bbdc5.png",
+            },
+            {
+              id: 7,
+              name: "Nasi Putih",
+              description:
+                "Traditional pizza with tomato sauce, mozzarella, and basil",
+              price: 5.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38d09171-8ac3-409c-bdd2-f574a91bbdc5.png",
+            },
+          ],
+          drinks: [
+            {
+              id: 8,
+              name: "Caffe Latte Hot",
+              description: "Freshly squeezed orange juice served chilled",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c166a888-e7a3-42cf-9501-3ce0aa6837f0.png",
+            },
+            {
+              id: 9,
+              name: "Caffe Latte Ice",
+              description: "House special blend with lemon and mint",
+              price: 22.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4305b133-d517-41a6-8570-96c44236430a.png",
+            },
+            {
+              id: 10,
+              name: "Cappucino Hot",
+              description: "Single or double shot of premium coffee",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ecacc1eb-fc78-451c-a94f-697bbfb3ca74.png",
+            },
+            {
+              id: 11,
+              name: "Cappucino Ice",
+              description: "Glass of premium red wine",
+              price: 22.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/751d2d39-d375-408a-a99b-b669d3f9afb2.png",
+            },
+            {
+              id: 12,
+              name: "Americano Hot",
+              description: "Local craft beer selection",
+              price: 18.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 13,
+              name: "Americano Ice",
+              description: "Local craft beer selection",
+              price: 18.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 14,
+              name: "Ambon Hot",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 15,
+              name: "Ambon Ice",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 16,
+              name: "Mocca Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 17,
+              name: "Mocca Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 18,
+              name: "Vanilla Coffee Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 19,
+              name: "Vanilla Coffee Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 20,
+              name: "Caramel Coffee Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 21,
+              name: "Caramel Coffee Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 22,
+              name: "Almond Coffee Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 23,
+              name: "Almond Coffee Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 24,
+              name: "Hazelnut Coffee Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 25,
+              name: "Hazelnut Coffee Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 26,
+              name: "Avocado Coffee Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 27,
+              name: "Avocado Coffee Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 28,
+              name: "Kopi Kelapa Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 29,
+              name: "Kopi Kelapa Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 30,
+              name: "Kopasus Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 31,
+              name: "Kopasus Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 32,
+              name: "Kopi Susu Hot",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 33,
+              name: "Kopi Susu Ice",
+              description: "Local craft beer selection",
+              price: 22.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 34,
+              name: "Aren Coffee Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 35,
+              name: "Aren Coffee Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 36,
+              name: "Biscoff Coffee Hot",
+              description: "Local craft beer selection",
+              price: 27.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 37,
+              name: "Biscoff Coffee Ice",
+              description: "Local craft beer selection",
+              price: 27.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 38,
+              name: "Chocolate Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 39,
+              name: "Chocolate Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 40,
+              name: "Biscoff Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 41,
+              name: "Biscoff Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 42,
+              name: "Cookies & Cream Hot",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 43,
+              name: "Cookies & Cream Ice",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 44,
+              name: "Banana Hot",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 45,
+              name: "Banana Ice",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 46,
+              name: "Red Velvet Hot",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 47,
+              name: "Red Velvet Ice",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 48,
+              name: "Avocado Hot",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 49,
+              name: "Avocado Ice",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 50,
+              name: "Taro Hot",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 51,
+              name: "Taro Ice",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 52,
+              name: "Milk Tea Hot",
+              description: "Local craft beer selection",
+              price: 16.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 53,
+              name: "Milk Tea Ice",
+              description: "Local craft beer selection",
+              price: 18.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 54,
+              name: "Lemon Tea Hot",
+              description: "Local craft beer selection",
+              price: 16.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 55,
+              name: "Lemon Tea Ice",
+              description: "Local craft beer selection",
+              price: 18.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 56,
+              name: "Air Mineral",
+              description: "Local craft beer selection",
+              price: 5.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+          ],
+          snacks: [
+            {
+              id: 57,
+              name: "Kentang Goreng",
+              description: "Fresh bread with garlic butter and herbs",
+              price: 15.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/84793ed5-29f0-4494-9b6d-b126a36ca2ab.png",
+            },
+            {
+              id: 58,
+              name: "Mix Platter",
+              description:
+                "Toasted bread topped with tomatoes, garlic, and basil",
+              price: 28.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/512b0509-03f2-41a1-8a4d-2fd019f430b6.png",
+            },
+            {
+              id: 59,
+              name: "Roti Bakar Coklat",
+              description:
+                "Selection of local cheeses with grapes and crackers",
+              price: 15.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/28da1069-9c59-4ade-884e-1fc9c6cf2dae.png",
+            },
+            {
+              id: 60,
+              name: "Roti Bakar Keju",
+              description: "Crispy wings with choice of sauce",
+              price: 15.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dae4ad7f-ccdd-4be6-b156-c6189b569436.png",
+            },
+            {
+              id: 61,
+              name: "Roti Bakar Coklat Keju",
+              description: "Mushrooms stuffed with cheese and herbs",
+              price: 17.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3308b2f2-d420-496c-8144-5b47035e5b6f.png",
+            },
+            {
+              id: 62,
+              name: "Pisang Goreng Coklat",
+              description:
+                "Selection of local cheeses with grapes and crackers",
+              price: 15.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/28da1069-9c59-4ade-884e-1fc9c6cf2dae.png",
+            },
+            {
+              id: 63,
+              name: "Pisang Goreng Keju",
+              description: "Crispy wings with choice of sauce",
+              price: 15.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dae4ad7f-ccdd-4be6-b156-c6189b569436.png",
+            },
+            {
+              id: 64,
+              name: "Pisang Goreng Coklat Keju",
+              description: "Mushrooms stuffed with cheese and herbs",
+              price: 17.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3308b2f2-d420-496c-8144-5b47035e5b6f.png",
+            },
+            {
+              id: 65,
+              name: "Pisang Goreng",
+              description: "Crispy wings with choice of sauce",
+              price: 15.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dae4ad7f-ccdd-4be6-b156-c6189b569436.png",
+            },
+            {
+              id: 66,
+              name: "Lumpia Goreng",
+              description: "Mushrooms stuffed with cheese and herbs",
+              price: 15.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3308b2f2-d420-496c-8144-5b47035e5b6f.png",
+            },
+          ],
+        };
+
+        // Current state
+        const state = {
+          currentCategory: "food",
+          order: {},
+          customerName: "",
+        };
+
+        // DOM elements
+        const menuItemsContainer = document.getElementById("menuItems");
+        const orderItemsContainer = document.getElementById("orderItems");
+        const orderTotalElement = document.getElementById("orderTotal");
+        const searchInput = document.getElementById("searchInput");
+        const tabs = document.querySelectorAll(".tab");
+        const customerNameInput = document.getElementById("customerName");
+        const printBtn = document.getElementById("printBtn");
+        const receiptModal = document.getElementById("receiptModal");
+        const closeReceiptBtn = document.getElementById("closeReceipt");
+        const receiptItemsContainer = document.getElementById("receiptItems");
+        const receiptTotalElement = document.getElementById("receiptTotal");
+        const receiptCustomerNameElement = document.getElementById(
+          "receiptCustomerName"
+        );
+        const receiptDateElement = document.getElementById("receiptDate");
+        const receiptOrderDateElement =
+          document.getElementById("receiptOrderDate");
+
+        // Initialize the app
+        function init() {
+          renderMenuItems();
+          setupEventListeners();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+          // Tab switching
+          tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+              tabs.forEach((t) => t.classList.remove("active"));
+              tab.classList.add("active");
+              state.currentCategory = tab.dataset.category;
+              renderMenuItems();
+            });
+          });
+
+          // Search functionality
+          searchInput.addEventListener("input", () => {
+            renderMenuItems();
+          });
+
+          // Customer name input
+          customerNameInput.addEventListener("input", (e) => {
+            state.customerName = e.target.value;
+          });
+
+          // Print receipt button
+          printBtn.addEventListener("click", () => {
+            showReceipt();
+          });
+
+          // Close receipt button
+          closeReceiptBtn.addEventListener("click", () => {
+            receiptModal.style.display = "none";
+          });
+
+          // Close modal when clicking outside
+          receiptModal.addEventListener("click", (e) => {
+            if (e.target === receiptModal) {
+              receiptModal.style.display = "none";
+            }
+          });
+        }
+
+        // Render menu items based on current category and search term
+        function renderMenuItems() {
+          const searchTerm = searchInput.value.toLowerCase();
+          const currentCategoryItems = menuData[state.currentCategory];
+
+          menuItemsContainer.innerHTML = "";
+
+          if (currentCategoryItems.length === 0) {
+            menuItemsContainer.innerHTML =
+              '<p class="no-items">No items in this category</p>';
+            return;
+          }
+
+          const filteredItems = currentCategoryItems.filter(
+            (item) =>
+              item.name.toLowerCase().includes(searchTerm) ||
+              item.description.toLowerCase().includes(searchTerm)
+          );
+
+          if (filteredItems.length === 0) {
+            menuItemsContainer.innerHTML =
+              '<p class="no-items">No matching items found</p>';
+            return;
+          }
+
+          filteredItems.forEach((item) => {
+            const menuItemElement = document.createElement("div");
+            menuItemElement.className = "menu-item";
+            menuItemElement.innerHTML = `
+                        <div class="menu-item-info">
+                            <h3 class="menu-item-name">${item.name}</h3>
+                            <div class="menu-item-footer">
+                                <span class="menu-item-price">Rp${(
+                                  item.price * 1000
+                                ).toLocaleString("id-ID")}</span>
+                                <button class="add-to-order" data-id="${
+                                  item.id
+                                }">+</button>
+                            </div>
+                        </div>
+                    `;
+            menuItemsContainer.appendChild(menuItemElement);
+          });
+
+          // Add event listeners to new add buttons
+          document.querySelectorAll(".add-to-order").forEach((button) => {
+            button.addEventListener("click", (e) => {
+              const itemId = parseInt(e.target.dataset.id);
+              addToOrder(itemId);
+            });
+          });
+        }
+
+        // Add item to order
+        function addToOrder(itemId) {
+          // Find the item in all categories
+          let item = null;
+          for (const category in menuData) {
+            item = menuData[category].find((i) => i.id === itemId);
+            if (item) break;
+          }
+
+          if (!item) return;
+
+          if (state.order[itemId]) {
+            state.order[itemId].quantity += 1;
+          } else {
+            state.order[itemId] = {
+              ...item,
+              quantity: 1,
+            };
+          }
+
+          renderOrderItems();
+        }
+
+        // Remove item from order
+        function removeFromOrder(itemId) {
+          if (state.order[itemId]) {
+            state.order[itemId].quantity -= 1;
+
+            if (state.order[itemId].quantity <= 0) {
+              delete state.order[itemId];
+            }
+          }
+
+          renderOrderItems();
+        }
+
+        // Render order items
+        function renderOrderItems() {
+          const orderItems = Object.values(state.order);
+
+          if (orderItems.length === 0) {
+            orderItemsContainer.innerHTML =
+              '<p class="no-items">No items added yet</p>';
+            orderTotalElement.textContent = "$0.00";
+            return;
+          }
+
+          orderItemsContainer.innerHTML = "";
+
+          orderItems.forEach((item) => {
+            const orderItemElement = document.createElement("div");
+            orderItemElement.className = "order-item";
+            orderItemElement.innerHTML = `
+                        <span class="order-item-name">${item.name}</span>
+                        <div class="order-item-controls">
+                            <button class="remove-from-order" data-id="${
+                              item.id
+                            }">-</button>
+                            <span class="order-item-quantity">x${
+                              item.quantity
+                            }</span>
+                            <span class="order-item-price">Rp${(
+                              item.price *
+                              item.quantity *
+                              1000
+                            ).toLocaleString("id-ID")}</span>
+                        </div>
+                    `;
+            orderItemsContainer.appendChild(orderItemElement);
+          });
+
+          // Add event listeners to remove buttons
+          document.querySelectorAll(".remove-from-order").forEach((button) => {
+            button.addEventListener("click", (e) => {
+              const itemId = parseInt(e.target.dataset.id);
+              removeFromOrder(itemId);
+            });
+          });
+
+          // Update total
+          const total = orderItems.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          );
+          orderTotalElement.textContent = `Rp${(total * 1000).toLocaleString(
+            "id-ID"
+          )}`;
+        }
+
+        // Show receipt in modal
+        function showReceipt() {
+          if (Object.keys(state.order).length === 0) {
+            alert("Please add items to your order first");
+            return;
+          }
+
+          // Set receipt data
+          const now = new Date();
+          receiptCustomerNameElement.textContent =
+            state.customerName || "Guest";
+          receiptDateElement.textContent = now.toLocaleDateString();
+          receiptOrderDateElement.textContent = now.toLocaleTimeString();
+
+          // Populate receipt items
+          receiptItemsContainer.innerHTML = "";
+          const orderItems = Object.values(state.order);
+          orderItems.forEach((item) => {
+            const itemElement = document.createElement("div");
+            itemElement.className = "receipt-item";
+            itemElement.innerHTML = `
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>Rp${(
+                          item.price *
+                          item.quantity *
+                          1000
+                        ).toLocaleString("id-ID")}</span>
+                    `;
+            receiptItemsContainer.appendChild(itemElement);
+          });
+
+          // Calculate and show total
+          const total = orderItems.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          );
+          receiptTotalElement.textContent = `Rp${(total * 1000).toLocaleString(
+            "id-ID"
+          )}`;
+
+          // Show modal
+          receiptModal.style.display = "flex";
+
+          // Print receipt if needed
+          setTimeout(() => {
+            window.print();
+          }, 500);
+        }
+
+        // Start the app
+        init();
+      });
+    </script>
+  </body>
+</html>
