@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menu NoPlan</title>
+    <title>Menu No Plan Caffe</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap"
       rel="stylesheet"
@@ -389,6 +389,40 @@
         justify-content: space-between;
       }
 
+      .payment-methods {
+        margin: 20px 0;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .payment-input {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .payment-input label {
+        width: 80px;
+        font-weight: 500;
+      }
+
+      .payment-input input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .payment-total {
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+      }
+
       .receipt-footer {
         text-align: center;
         margin-top: 30px;
@@ -468,7 +502,7 @@
     <div class="container">
       <header>
         <h1>No Plan Kitchen</h1>
-        <p class="subtitle">Friendly prices</p>
+        <p class="subtitle">Friendly Prices</p>
       </header>
 
       <div class="menu-system">
@@ -485,7 +519,8 @@
 
           <div class="category-tabs">
             <div class="tab active" data-category="food">Food</div>
-            <div class="tab" data-category="drinks">Drinks</div>
+            <div class="tab" data-category="coffee">Coffee</div>
+            <div class="tab" data-category="noncoffee">NonCoffee</div>
             <div class="tab" data-category="snacks">Snacks</div>
           </div>
 
@@ -498,7 +533,7 @@
           <div class="order-header">
             <h2 class="order-title">Your Order</h2>
             <button class="print-btn" id="printBtn">
-              <span class="print-icon">🖨️</span> Print Receipt
+              <span class="print-icon">🧾</span> Open Receipt
             </button>
           </div>
 
@@ -547,11 +582,31 @@
           <span id="receiptTotal">Rp0</span>
         </div>
 
+        <div class="payment-methods">
+          <div class="payment-input">
+            <label>Cash:</label>
+            <input type="number" id="cashAmount" placeholder="0" min="0" />
+          </div>
+          <div class="payment-input">
+            <label>Transfer:</label>
+            <input type="number" id="transferAmount" placeholder="0" min="0" />
+          </div>
+          <div class="payment-total">
+            <span>Change:</span>
+            <span id="changeAmount">Rp0</span>
+          </div>
+        </div>
+
         <div class="receipt-footer">
           <p>Dangke Banya</p>
         </div>
 
-        <button class="close-receipt" id="closeReceipt">Close</button>
+        <div style="display: flex; gap: 10px">
+          <button class="close-receipt" id="closeReceipt">Close</button>
+          <button class="print-btn" id="printReceiptBtn" style="margin-top: 0">
+            <span class="print-icon">🖨️</span> Print Receipt
+          </button>
+        </div>
       </div>
     </div>
 
@@ -622,7 +677,7 @@
                 "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38d09171-8ac3-409c-bdd2-f574a91bbdc5.png",
             },
           ],
-          drinks: [
+          coffee: [
             {
               id: 8,
               name: "Caffe Latte Hot",
@@ -865,158 +920,6 @@
             },
             {
               id: 38,
-              name: "Chocolate Hot",
-              description: "Local craft beer selection",
-              price: 25.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 39,
-              name: "Chocolate Ice",
-              description: "Local craft beer selection",
-              price: 27.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 40,
-              name: "Biscoff Hot",
-              description: "Local craft beer selection",
-              price: 27.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 41,
-              name: "Biscoff Ice",
-              description: "Local craft beer selection",
-              price: 27.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 42,
-              name: "Cookies & Cream Hot",
-              description: "Local craft beer selection",
-              price: 23.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 43,
-              name: "Cookies & Cream Ice",
-              description: "Local craft beer selection",
-              price: 25.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 44,
-              name: "Banana Hot",
-              description: "Local craft beer selection",
-              price: 23.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 45,
-              name: "Banana Ice",
-              description: "Local craft beer selection",
-              price: 25.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 46,
-              name: "Red Velvet Hot",
-              description: "Local craft beer selection",
-              price: 23.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 47,
-              name: "Red Velvet Ice",
-              description: "Local craft beer selection",
-              price: 25.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 48,
-              name: "Avocado Hot",
-              description: "Local craft beer selection",
-              price: 23.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 49,
-              name: "Avocado Ice",
-              description: "Local craft beer selection",
-              price: 25.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 50,
-              name: "Taro Hot",
-              description: "Local craft beer selection",
-              price: 23.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 51,
-              name: "Taro Ice",
-              description: "Local craft beer selection",
-              price: 25.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 52,
-              name: "Milk Tea Hot",
-              description: "Local craft beer selection",
-              price: 18.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 53,
-              name: "Milk Tea Ice",
-              description: "Local craft beer selection",
-              price: 20.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 54,
-              name: "Lemon Tea Hot",
-              description: "Local craft beer selection",
-              price: 18.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 55,
-              name: "Lemon Tea Ice",
-              description: "Local craft beer selection",
-              price: 20.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 56,
-              name: "Air Mineral",
-              description: "Local craft beer selection",
-              price: 6.0,
-              image:
-                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
-            },
-            {
-              id: 57,
               name: "Banana Coffee Hot",
               description: "Local craft beer selection",
               price: 27.0,
@@ -1024,15 +927,161 @@
                 "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
             },
             {
-              id: 58,
+              id: 39,
               name: "Banana Coffee Ice",
               description: "Local craft beer selection",
               price: 27.0,
               image:
                 "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
             },
+          ],
+          noncoffee: [
             {
-              id: 59,
+              id: 40,
+              name: "Chocolate Hot",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 41,
+              name: "Chocolate Ice",
+              description: "Local craft beer selection",
+              price: 27.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 42,
+              name: "Biscoff Hot",
+              description: "Local craft beer selection",
+              price: 27.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 43,
+              name: "Biscoff Ice",
+              description: "Local craft beer selection",
+              price: 27.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 44,
+              name: "Cookies & Cream Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 45,
+              name: "Cookies & Cream Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 46,
+              name: "Banana Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 47,
+              name: "Banana Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 48,
+              name: "Red Velvet Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 49,
+              name: "Red Velvet Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 50,
+              name: "Avocado Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 51,
+              name: "Avocado Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 52,
+              name: "Taro Hot",
+              description: "Local craft beer selection",
+              price: 23.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 53,
+              name: "Taro Ice",
+              description: "Local craft beer selection",
+              price: 25.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 54,
+              name: "Milk Tea Hot",
+              description: "Local craft beer selection",
+              price: 18.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 55,
+              name: "Milk Tea Ice",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 56,
+              name: "Lemon Tea Hot",
+              description: "Local craft beer selection",
+              price: 18.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 57,
+              name: "Lemon Tea Ice",
+              description: "Local craft beer selection",
+              price: 20.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 58,
               name: "Teh Manis Hot",
               description: "Local craft beer selection",
               price: 10.0,
@@ -1040,10 +1089,18 @@
                 "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
             },
             {
-              id: 60,
+              id: 59,
               name: "Teh Manis Ice",
               description: "Local craft beer selection",
               price: 12.0,
+              image:
+                "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
+            },
+            {
+              id: 60,
+              name: "Air Mineral",
+              description: "Local craft beer selection",
+              price: 6.0,
               image:
                 "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e2fee9a7-d2b0-4346-8fb3-a84dc7a489a9.png",
             },
@@ -1389,13 +1446,33 @@
             "id-ID"
           )}`;
 
+          // Setup payment inputs
+          const cashInput = document.getElementById("cashAmount");
+          const transferInput = document.getElementById("transferAmount");
+          const changeElement = document.getElementById("changeAmount");
+
+          function calculateChange() {
+            const cash = parseFloat(cashInput.value) || 0;
+            const transfer = parseFloat(transferInput.value) || 0;
+            const totalPaid = cash + transfer;
+            const change = totalPaid - total;
+            changeElement.textContent = `Rp${(change * 1000).toLocaleString(
+              "id-ID"
+            )}`;
+          }
+
+          cashInput.addEventListener("input", calculateChange);
+          transferInput.addEventListener("input", calculateChange);
+
           // Show modal
           receiptModal.style.display = "flex";
 
-          // Print receipt if needed
-          setTimeout(() => {
-            window.print();
-          }, 500);
+          // Add print button event listener
+          document
+            .getElementById("printReceiptBtn")
+            .addEventListener("click", () => {
+              window.print();
+            });
         }
 
         // Start the app
