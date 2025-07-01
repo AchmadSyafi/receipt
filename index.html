@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menu No Plan Caffe</title>
+    <title>Menu No Plan Caffee</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap"
       rel="stylesheet"
@@ -355,13 +355,14 @@
 
       .receipt-header {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
 
       .receipt-title {
-        font-family: "Playfair Display", serif;
-        color: var(--secondary);
-        margin-bottom: 5px;
+        font-family: "Poppins", sans-serif;
+        color: black;
+        margin-bottom: 3px;
+        font-size: 14px;
       }
 
       .receipt-date {
@@ -370,36 +371,36 @@
       }
 
       .receipt-items {
-        margin: 20px 0;
+        margin: 10px 0;
       }
 
       .receipt-item {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+        font-size: 11px;
       }
 
       .receipt-total {
-        margin-top: 20px;
-        padding-top: 10px;
-        border-top: 2px dashed #ccc;
-        font-weight: 500;
-        font-size: 18px;
+        margin-top: 10px;
+        padding-top: 5px;
+        border-top: 1px dashed #ccc;
+        font-weight: bold;
+        font-size: 13px;
         display: flex;
         justify-content: space-between;
       }
 
       .payment-methods {
-        margin: 20px 0;
-        padding: 15px;
-        background: #f8f9fa;
-        border-radius: 8px;
+        margin: 10px 0;
+        padding: 5px;
+        font-size: 11px;
       }
 
       .payment-input {
         display: flex;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
       }
 
       .payment-input label {
@@ -425,10 +426,10 @@
 
       .receipt-footer {
         text-align: center;
-        margin-top: 30px;
+        margin-top: 15px;
         color: #666;
         font-style: italic;
-        font-size: 14px;
+        font-size: 11px;
       }
 
       .close-receipt {
@@ -459,17 +460,20 @@
           position: absolute;
           left: 0;
           top: 0;
-          width: 100%;
+          width: 58mm;
           height: auto;
           background: none;
+          padding: 0;
+          margin: 0;
         }
         .receipt-content {
-          width: 100%;
-          box-shadow: none;
-          padding: 0;
+          width: 58mm;
+          padding: 5px 10px;
           margin: 0;
           max-height: none;
           overflow: visible;
+          box-shadow: none;
+          border: none;
         }
         .close-receipt {
           display: none;
